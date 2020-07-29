@@ -2,7 +2,7 @@
  * @Author: zhanghan
  * @Date: 2020-07-28 11:04:59
  * @LastEditors: zhanghan
- * @LastEditTime: 2020-07-29 18:36:43
+ * @LastEditTime: 2020-07-29 19:08:03
  * @Descripttion: 单位新参保登记申请
 -->
 <!DOCTYPE html>
@@ -18,13 +18,6 @@
   <link rel="stylesheet/less" type="text/css" href="less/reset.less" />
   <!-- 自定义样式 -->
   <link rel="stylesheet/less" type="text/css" href="less/styles.less" />
-  <!-- es6语法兼容IE -->
-  <script charset="UTF-8" src="es6/polyfill.min.js"></script>
-  <script charset="UTF-8" src="es6/browser.min.js"></script>
-  <!-- less语法转换css -->
-  <script charset="UTF-8" src="less/less.min@3.11.1.js"></script>
-  <!-- 工具函数 -->
-  <script charset="UTF-8" src="utils/compressImg.js"></script>
 </head>
 
 <body>
@@ -446,15 +439,21 @@
 </body>
 
 </html>
+<!-- es6语法兼容IE -->
+<script charset="UTF-8" src="es6/polyfill.min.js"></script>
+<script charset="UTF-8" src="es6/browser.min.js"></script>
+<!-- less语法转换css -->
+<script charset="UTF-8" src="less/less.min@3.11.1.js"></script>
 <!-- import Vue before Element -->
 <script charset="UTF-8" src="vue/vue@2.6.11.js"></script>
 <!-- import axios before Element -->
 <script charset="UTF-8" src="vue/axios.min@0.19.2.js"></script>
 <!-- import element-ui -->
 <script charset="UTF-8" src="element-ui/element-ui@2.13.2.js"></script>
+<!-- 工具函数 -->
+<script charset="UTF-8" src="utils/compressImg.js"></script>
 <!-- 引入组件 -->
-<script type="text/babel" src="components/test.js">
-</script>
+<script type="text/babel" src="components/test.js"></script>
 
 <script type="text/babel">
   var Main = {
