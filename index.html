@@ -1,0 +1,699 @@
+<!--
+ * @Author: zhanghan
+ * @Date: 2020-07-28 11:04:59
+ * @LastEditors: zhanghan
+ * @LastEditTime: 2020-07-29 18:36:43
+ * @Descripttion: 单位新参保登记申请
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>单位新参保登记申请</title>
+  <!-- elemnt-ui样式 -->
+  <link rel="stylesheet" href="element-ui/element-ui@2.13.2.css">
+  <!-- 重置elemnt-ui样式 -->
+  <link rel="stylesheet/less" type="text/css" href="less/reset.less" />
+  <!-- 自定义样式 -->
+  <link rel="stylesheet/less" type="text/css" href="less/styles.less" />
+  <!-- es6语法兼容IE -->
+  <script charset="UTF-8" src="es6/polyfill.min.js"></script>
+  <script charset="UTF-8" src="es6/browser.min.js"></script>
+  <!-- less语法转换css -->
+  <script charset="UTF-8" src="less/less.min@3.11.1.js"></script>
+  <!-- 工具函数 -->
+  <script charset="UTF-8" src="utils/compressImg.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div class="title">单位新参保登记申请</div>
+    <div class="stepBar">
+      <el-steps :active="nowStep" align-center>
+        <el-step title="1 填写申请信息"></el-step>
+        <el-step title="2 窗口审核"></el-step>
+        <el-step title="3 申请成功"></el-step>
+      </el-steps>
+    </div>
+    <!-- 填写申请信息 -->
+    <div v-if="nowStep===1">
+      <el-form ref="formAdd" size="small" class="submit-form" :model="formAdd" :rules="formAddRule" label-width="130px">
+        <div class="samll-title">
+          <span class="title-dot"></span>
+          <span class="title-text">单位基本信息</span>
+        </div>
+        <el-col :span="8">
+          <el-form-item label="单位保险号" prop="cloum1">
+            <el-input v-model="formAdd.cloum1" placeholder="请输入" :disabled="true"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="单位编号" prop="cloum2">
+            <el-input v-model="formAdd.cloum2" placeholder="请输入" :disabled="true"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="社保编码" prop="cloum3">
+            <el-input v-model="formAdd.cloum3" placeholder="请输入"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="单位档案号" prop="cloum4">
+            <el-input v-model="formAdd.cloum4" placeholder="请输入"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="16">
+          <el-form-item label="单位名称" prop="cloum5">
+            <el-input v-model="formAdd.cloum5" placeholder="请输入"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="单位类型" prop="cloum6">
+            <el-select v-model="formAdd.cloum6" placeholder="请选择">
+              <el-option v-for="(item,index) in cloum6List" :key="index" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="组织机构代码" prop="cloum7">
+            <el-input v-model="formAdd.cloum7" placeholder="请输入"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="所属行政区划" prop="cloum8">
+            <el-select v-model="formAdd.cloum8" placeholder="请选择">
+              <el-option v-for="(item,index) in cloum8List" :key="index" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="工商执照种类" prop="cloum9">
+            <el-select v-model="formAdd.cloum9" placeholder="请选择">
+              <el-option v-for="(item,index) in cloum9List" :key="index" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="工商执照号码" prop="cloum10">
+            <el-input v-model="formAdd.cloum10" placeholder="请输入"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="工商发照日期" prop="cloum11">
+            <el-date-picker v-model="formAdd.cloum11" type="date" placeholder="选择日期"></el-date-picker>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="工商有效年限" prop="cloum12">
+            <el-input v-model="formAdd.cloum12" placeholder="请输入"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="行业代码" prop="cloum13">
+            <el-input v-model="formAdd.cloum13" placeholder="请输入"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="单位类别" prop="cloum14">
+            <el-select v-model="formAdd.cloum14" placeholder="请选择">
+              <el-option v-for="(item,index) in cloum14List" :key="index" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="主管部门" prop="cloum15">
+            <el-input v-model="formAdd.cloum15" placeholder="请输入"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="隶属关系" prop="cloum16">
+            <el-select v-model="formAdd.cloum16" placeholder="请选择">
+              <el-option v-for="(item,index) in cloum16List" :key="index" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="特殊单位类别" prop="cloum17">
+            <el-select v-model="formAdd.cloum17" placeholder="请选择">
+              <el-option v-for="(item,index) in cloum17List" :key="index" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="税务机构编号" prop="cloum18">
+            <el-input v-model="formAdd.cloum18" placeholder="请输入" :disabled="true">
+              <i class="el-icon-search" slot="append"></i>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="税务机构名称" prop="cloum19">
+            <el-input v-model="formAdd.cloum19" placeholder="请输入" :disabled="true"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="税号" prop="cloum20">
+            <el-input v-model="formAdd.cloum20" placeholder="请输入"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="工商登记发照机关" prop="cloum21">
+            <el-input v-model="formAdd.cloum21" placeholder="请输入"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="地税比对结果" prop="cloum22">
+            <el-input v-model="formAdd.cloum22" placeholder="请输入" :disabled="true"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="合同号" prop="cloum23">
+            <el-input v-model="formAdd.cloum23" placeholder="请输入"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="批准成立部门" prop="cloum24">
+            <el-input v-model="formAdd.cloum24" placeholder="请输入"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="批准成立日期" prop="cloum25">
+            <el-date-picker v-model="formAdd.cloum25" type="date" placeholder="选择日期"></el-date-picker>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="批准成立文号" prop="cloum26">
+            <el-input v-model="formAdd.cloum26" placeholder="请输入"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="社会统一信用代码" prop="cloum27">
+            <el-input v-model="formAdd.cloum27" placeholder="请输入"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="16">
+          <el-form-item label="备注" prop="cloum28">
+            <el-input v-model="formAdd.cloum28" type="textarea" placeholder="请输入"></el-input>
+          </el-form-item>
+        </el-col>
+        <div class="samll-title">
+          <span class="title-dot"></span>
+          <span class="title-text">单位参保信息</span>
+        </div>
+        <el-col :span="8">
+          <el-form-item label="银行行号" prop="cloum29">
+            <el-input v-model="formAdd.cloum29" placeholder="请输入">
+              <i class="el-icon-search" slot="append"></i>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="16">
+          <el-form-item label="开户行名称" prop="cloum30">
+            <el-input v-model="formAdd.cloum30" placeholder="请输入"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="24">
+          <el-col :span="8">
+            <el-form-item label="缴费账号" prop="cloum31">
+              <el-input v-model="formAdd.cloum31" placeholder="请输入"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="缴费账号名" prop="cloum32">
+              <el-input v-model="formAdd.cloum32" placeholder="请输入"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-col>
+        <div class="samll-title">
+          <span class="title-dot"></span>
+          <span class="title-text">联系信息</span>
+        </div>
+        <el-col :span="24">
+          <el-col :span="8">
+            <el-form-item label="邮政编码" prop="cloum33">
+              <el-input v-model="formAdd.cloum33" placeholder="请输入"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="地址" prop="cloum34">
+              <el-input v-model="formAdd.cloum34" type="textarea" placeholder="请输入"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="单位电话" prop="cloum35">
+              <el-input v-model="formAdd.cloum35" placeholder="请输入"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="法人姓名" prop="cloum36">
+            <el-input v-model="formAdd.cloum36" placeholder="请输入"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="法人证件号码" prop="cloum37">
+            <el-input v-model="formAdd.cloum37" placeholder="请输入"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="法人职务" prop="cloum38">
+            <el-input v-model="formAdd.cloum38" placeholder="请输入"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="联系人姓名" prop="cloum39">
+            <el-input v-model="formAdd.cloum39" placeholder="请输入"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="联系电话" prop="cloum40">
+            <el-input v-model="formAdd.cloum40" placeholder="请输入"></el-input>
+          </el-form-item>
+          <div class="msg-tip-div">
+            <span class="msg-tip">【温馨提示】新参保申请成功后我们将通过短信形式将账号发放至您的联系电话</span>
+          </div>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="验证码" prop="cloum41">
+            <el-input v-model="formAdd.cloum41" placeholder="请输入">
+              <el-button slot="append">获取验证码</el-button>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="24">
+          <div class="samll-title">
+            <span class="title-dot"></span>
+            <span class="title-text">附件上传</span>
+          </div>
+          <div class="msg-tip-div" style="padding-left: 10px;margin-bottom: 20px;">
+            <span class="msg-tip">【温馨提示】您需要通过图片形式提供并上传以下材料，大小不超过5M</span>
+          </div>
+        </el-col>
+        <el-col :span="24">
+          <el-col :span="12">
+            <el-form-item label="受理材料" prop="fileList1">
+              <el-upload ref="upload1" class="upload-demo" drag multiple
+                action="https://jsonplaceholder.typicode.com/posts/"
+                :on-preview="function(file){handlePreview(file,'fileList1')}"
+                :on-change="function(file, fileList){fileChange(file, fileList,'fileList1',['jpeg','jpg','png'])}"
+                :on-remove="function(file, fileList){handleRemove(file, fileList,'fileList1')}"
+                accept="image/jpeg,image/jpg,image/png" :file-list="formAdd.fileList1" list-type="picture"
+                :auto-upload="false">
+                <i class="el-icon-upload"></i>
+                <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过5M</div>
+              </el-upload>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="单位登记表" prop="fileList2">
+              <el-upload ref="upload2" class="upload-demo" drag multiple
+                action="https://jsonplaceholder.typicode.com/posts/"
+                :on-preview="function(file){handlePreview(file,'fileList2')}"
+                :on-change="function(file, fileList){fileChange(file, fileList,'fileList2',['jpeg','jpg','png'])}"
+                :on-remove="function(file, fileList){handleRemove(file, fileList,'fileList2')}"
+                accept="image/jpeg,image/jpg,image/png" :file-list="formAdd.fileList2" list-type="picture"
+                :auto-upload="false">
+                <i class="el-icon-upload"></i>
+                <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过5M</div>
+              </el-upload>
+            </el-form-item>
+          </el-col>
+        </el-col>
+        <el-col :span="24">
+          <el-col :span="12">
+            <el-form-item label="营业执照" prop="fileList3">
+              <el-upload ref="upload3" class="upload-demo" drag multiple
+                action="https://jsonplaceholder.typicode.com/posts/"
+                :on-preview="function(file){handlePreview(file,'fileList3')}"
+                :on-change="function(file, fileList){fileChange(file, fileList,'fileList3',['jpeg','jpg','png'])}"
+                :on-remove="function(file, fileList){handleRemove(file, fileList,'fileList3')}"
+                accept="image/jpeg,image/jpg,image/png" :file-list="formAdd.fileList3" list-type="picture"
+                :auto-upload="false">
+                <i class="el-icon-upload"></i>
+                <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过5M</div>
+              </el-upload>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="统一社会信用代码证书" prop="fileList4">
+              <el-upload ref="upload4" class="upload-demo" drag multiple
+                action="https://jsonplaceholder.typicode.com/posts/"
+                :on-preview="function(file){handlePreview(file,'fileList4')}"
+                :on-change="function(file, fileList){fileChange(file, fileList,'fileList4',['jpeg','jpg','png'])}"
+                :on-remove="function(file, fileList){handleRemove(file, fileList,'fileList4')}"
+                accept="image/jpeg,image/jpg,image/png" :file-list="formAdd.fileList4" list-type="picture"
+                :auto-upload="false">
+                <i class="el-icon-upload"></i>
+                <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过5M</div>
+              </el-upload>
+            </el-form-item>
+          </el-col>
+        </el-col>
+        <el-col :span="24" class="btn-div">
+          <el-button class="save-btn" @click="saveSubmimt('formAdd')" :loading="saveLoading">保存</el-button>
+          <el-button class="save-btn" @click="geto(2)">窗口审核</el-button>
+          <el-button class="save-btn" @click="geto(3)">申请成功</el-button>
+        </el-col>
+      </el-form>
+    </div>
+    <!-- 窗口审核 -->
+    <div style="text-align: center;">
+      <div v-if="nowStep===2" class="wait-step">
+        <div class="wait-head">
+          <div class="wait-img">
+            <img src="./img/tijiao.png" />
+          </div>
+          <div class="wait-intro">
+            <div>
+              您的新参保申请已提交至窗口审核，请耐心等待审核结果。
+            </div>
+            <div class="wait-msg">
+              【温馨提示】如需修改申请信息，点击下方按钮进行查看，修改。
+            </div>
+            <div class="btn-div">
+              <el-button class="edit-btn">
+                修改申请信息</el-button>
+            </div>
+          </div>
+        </div>
+        <div class="samll-title">
+          <span class="title-dot"></span>
+          <span class="title-text">申请进度详情</span>
+        </div>
+        <div class="wait-detail">
+          <div class="detail-div">
+            <span class="detail-dot"></span>
+            <span class="detail-text">
+              <span>您的单位【才华有限公司】新参保申请已提交，请耐心等待窗口审核</span>
+              <p class="content">申请人：才华有限公司</p>
+              <p class="content">提交时间：2020-07-27 17:38:02</p>
+              <!-- 子组件测试 -->
+              <test name="李四"></test>
+            </span>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 申请成功 -->
+    <div style="text-align: center;">
+      <div v-if="nowStep===3" class="wait-step">
+        <div class="wait-head">
+          <div class="wait-img">
+            <img src="./img/chenggong.png" />
+          </div>
+          <div class="wait-intro">
+            <div>
+              您的新参保申请已申请成功！账号已通过短信形式发放，请注意查收。
+            </div>
+            <div class="wait-msg" style="margin-top: 40px;">
+              【温馨提示】账号已通过短信形式发放至您预留的手机号，为确保账户安全，请尽快登录并修改初始密码。
+            </div>
+          </div>
+        </div>
+        <div class="samll-title">
+          <span class="title-dot"></span>
+          <span class="title-text">申请进度详情</span>
+        </div>
+        <div class="wait-detail">
+          <div class="detail-div" v-for="(item,index) in detailList">
+            <span class="detail-dot"></span>
+            <span class="detail-text">
+              <span>{{item.title}}</span>
+              <p v-if="item.personName" class="content">{{item.personName}}</p>
+              <p class="content">{{item.date}}</p>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 图片查看器(兼容ie) -->
+    <el-image ref="preview" class="hideImgDiv" :src="previewImg" :preview-src-list="previewImgList" :z-index="9999">
+    </el-image>
+  </div>
+</body>
+
+</html>
+<!-- import Vue before Element -->
+<script charset="UTF-8" src="vue/vue@2.6.11.js"></script>
+<!-- import axios before Element -->
+<script charset="UTF-8" src="vue/axios.min@0.19.2.js"></script>
+<!-- import element-ui -->
+<script charset="UTF-8" src="element-ui/element-ui@2.13.2.js"></script>
+<!-- 引入组件 -->
+<script type="text/babel" src="components/test.js">
+</script>
+
+<script type="text/babel">
+  var Main = {
+    data () {
+      return {
+        nowStep: 1,
+        formAdd: {
+          fileList1: [],
+          fileList2: [],
+          fileList3: [],
+          fileList4: [],
+        },
+        saveLoading: false, //保存按钮加载状态
+        detailList: [{
+          title: '您的单位【才华有限公司】新参保申请已提交，请耐心等待窗口审核',
+          personName: '',
+          date: '审核时间：2020-07-29 17:38:02'
+        }, {
+          title: '您的单位【才华有限公司】新参保申请窗口审核成功，新参保申请成功！',
+          personName: '才华有限公司',
+          date: '提交时间：2020-07-27 17:38:02'
+        }],
+        cloum6List: [],
+        cloum8List: [],
+        cloum9List: [],
+        cloum14List: [],
+        cloum16List: [],
+        cloum17List: [],
+        previewImg: '', //当前查看的图片
+        previewImgList: [], //当前查看的图片列表
+        formAddRule: {
+          cloum5: [{
+            required: true,
+            message: "请输入单位名称",
+            trigger: "blur"
+          }],
+          cloum6: [{
+            required: true,
+            message: "请选择单位类型",
+            trigger: "change"
+          }],
+          cloum8: [{
+            required: true,
+            message: "请选择所属行政区划",
+            trigger: "change"
+          }],
+          cloum14: [{
+            required: true,
+            message: "请选择单位类型",
+            trigger: "change"
+          }],
+          cloum16: [{
+            required: true,
+            message: "请选择隶属关系",
+            trigger: "change"
+          }],
+          cloum17: [{
+            required: true,
+            message: "请选择特殊单位类别",
+            trigger: "change"
+          }],
+          cloum18: [{
+            required: true,
+            message: "请输入税务机构编号",
+            trigger: "blur"
+          }],
+          cloum19: [{
+            required: true,
+            message: "请输入税务机构名称",
+            trigger: "blur"
+          }],
+          cloum20: [{
+            required: true,
+            message: "请输入税号",
+            trigger: "blur"
+          }],
+          cloum36: [{
+            required: true,
+            message: "请输入法人姓名",
+            trigger: "blur"
+          }],
+          cloum37: [{
+            required: true,
+            message: "请输入法人证件号码",
+            trigger: "blur"
+          }],
+          cloum39: [{
+            required: true,
+            message: "请输入联系人姓名",
+            trigger: "blur"
+          }],
+          cloum40: [{
+            required: true,
+            message: "请输入联系电话",
+            trigger: "blur"
+          }],
+          cloum41: [{
+            required: true,
+            message: "请输入验证码",
+            trigger: "blur"
+          }],
+          fileList1: [{
+            required: true,
+            message: "请上传文件",
+            trigger: "change",
+            type: "array"
+          }],
+          fileList2: [{
+            required: true,
+            message: "请上传文件",
+            trigger: "change",
+            type: "array"
+          }],
+          fileList3: [{
+            required: true,
+            message: "请上传文件",
+            trigger: "change"
+          }],
+          fileList4: [{
+            required: true,
+            message: "请上传文件",
+            trigger: "change"
+          }],
+        }
+      }
+    },
+    methods: {
+      // 移除文件
+      handleRemove (file, fileList, fileListName) {
+        console.log(file, fileList, fileListName);
+        this.formAdd[fileListName] = fileList
+        console.log(fileListName, this.formAdd[fileListName]);
+      },
+      // 查看文件
+      handlePreview (file, fileListName) {
+        console.log(file, fileListName);
+        // 获取图片base64
+        this.previewImg = file.url
+        // 获取要查看的图片列表
+        this.previewImgList = this.formAdd[fileListName].map( (item, index)=> {
+          return item.url
+        })
+        //调用image组件中的大图浏览图片方法
+        this.$refs.preview.clickHandler();
+      },
+      // 文件改变事件
+      fileChange (file, fileList, fileListName, typeAry) {
+        console.log(file, fileList, fileListName);
+        //限制文件类型
+        if (typeAry && typeAry.length > 0) {
+          let fileType = file.name.substring(file.name.lastIndexOf('.') + 1)
+          if (typeAry.indexOf(fileType) == -1) {
+            this.$message({
+              message: '请上传' + typeAry.join('，') + '格式文件！',
+              type: 'warning'
+            });
+            // 这里强制刷新文件列表（否则文件还在页面文件列表显示）
+            this.formAdd[fileListName] = [...this.formAdd[fileListName]]
+            return false
+          }
+        }
+        // 文件大小限制
+        const fileSize = file.size / (1024 * 1024)
+        console.log('fileSize', fileSize)
+        if (fileSize >= 5) {
+          this.$message({
+            message: "文件大小超出5M限制",
+            type: "warning"
+          });
+          // 这里强制刷新文件列表（否则文件还在页面文件列表显示）
+          this.formAdd[fileListName] = [...this.formAdd[fileListName]]
+          return false
+        }
+        // 本地上传就压缩图片
+        // 先转base64
+        blobToDataURL(file.raw).then( (res) =>{
+          // 压缩
+          compressImg(res, 800, 0.5).then( (val)=> {
+            // 将压缩后的值添加进当前文件对象
+            file.compressBase64 = val
+            // 将当前文件赋值,显示最新上传文件
+            this.formAdd[fileListName] = fileList
+            console.log('9999999', fileListName, this.formAdd[fileListName]);
+          });
+        })
+      },
+      // 提交保存
+      saveSubmimt (formName) {
+        console.log('this.formAdd', this.formAdd)
+        // 表单校验
+        this.$refs[formName].validate( (valid)=> {
+          // 校验成功
+          if (!valid) {
+            var fileListObj = {
+              fileList1: [],
+              fileList2: [],
+              fileList3: [],
+              fileList4: [],
+            }
+            // 批量获取压缩后的图片base64
+            for (const key in fileListObj) {
+              fileListObj[key] = this.formAdd[key].map( (item, index) =>{
+                return item.compressBase64
+              })
+            }
+            // 构造请求数据
+            let sendObj = {
+              ...this.formAdd,
+              ...fileListObj
+            }
+            console.log('sendObj', sendObj)
+            // 请求示例
+            this.saveLoading = true
+            axios.post('http://rap2.taobao.org:38080/app/mock/236973/test/getMenuList.jhtml', {
+              token: '123456',
+              id: 'abcd',
+              sendObj
+            }).then( (response)=> {
+              this.saveLoading = false
+              var data = response.data
+              console.log('响应数据', data)
+            }).catch( (error)=> {
+              this.saveLoading = false
+              console.log('错误信息', error);
+            });
+          } else {
+            this.$message({
+              message: "请完善必填项！",
+              type: "warning"
+            });
+            return false;
+          }
+        });
+      },
+      geto (step) {
+        this.nowStep = step
+      }
+    }
+  }
+  var Ctor = Vue.extend(Main)
+  new Ctor().$mount('#app')
+</script>

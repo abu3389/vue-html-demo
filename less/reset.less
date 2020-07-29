@@ -1,0 +1,76 @@
+.el-step.is-horizontal {
+  display: inline-flex;
+  flex-direction: column-reverse;
+}
+
+.el-step__title.is-finish {
+  color: #FB9C13;
+  font-size: 18px;
+}
+
+.el-step__head.is-finish {
+  color: #FB9C13;
+  border-color: #FB9C13;
+
+  .el-step__icon.is-text {
+    border: none;
+
+    .el-step__icon-inner {
+      background-color: #FB9C13;
+      border-radius: 50%;
+      height: 15px;
+      width: 15px;
+    }
+  }
+}
+
+.el-step__title.is-process,
+.el-step__title.is-wait {
+  color: #999999;
+  font-size: 18px;
+  font-weight: normal !important;
+}
+
+.el-step__head.is-process,
+.el-step__head.is-wait {
+  color: #999999;
+  border-color: #999999;
+
+  .el-step__icon.is-text {
+    border: none;
+
+    .el-step__icon-inner {
+      background-color: #999999;
+      border-radius: 50%;
+      height: 15px;
+      width: 15px;
+    }
+  }
+}
+
+.el-select,
+.el-date-editor.el-input {
+  width: 100%;
+}
+
+.el-input-group__append {
+  background-color: white;
+  border: 0;
+
+  .el-icon-search {
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .el-button {
+    border: 1px solid !important;
+    margin-left: 0px !important;
+  }
+}
+
+// 兼容IE
+.el-form-item--small .el-form-item__content,
+.el-form-item--small .el-form-item__label,
+.el-input--small .el-input__inner {
+  line-height: 30px
+}

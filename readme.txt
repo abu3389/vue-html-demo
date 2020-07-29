@@ -1,0 +1,2 @@
+调试本项目需在启动服务环境下运行，直接打开无法浏览。
+如果是vscode编辑器调试需配合安装vscode插件 Live Server 在index.html右键启动服务

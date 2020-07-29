@@ -1,0 +1,166 @@
+#app {
+  padding: 16px 40px;
+
+  .title {
+    font-size: 28px;
+    color: #FB9C13;
+    text-align: center;
+  }
+
+  .samll-title {
+    font-size: 0;
+    margin-bottom: 16px;
+    text-align: left;
+
+    .title-dot {
+      display: inline-block;
+      width: 3px;
+      height: 16px;
+      vertical-align: middle;
+      background-color: #FB9C13;
+    }
+
+    .title-text {
+      font-size: 18px;
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 6px;
+    }
+  }
+
+  .stepBar {
+    margin: 15px 0;
+  }
+
+
+
+  // 步骤1 填写申请信息
+  .submit-form {
+    margin-top: 16px;
+
+    .msg-tip-div {
+      padding-left: 60px;
+      margin-top: -5px;
+      margin-bottom: 16px;
+
+      .msg-tip {
+        color: #FB9C13;
+        font-size: 14px;
+      }
+    }
+
+    .btn-div {
+      margin: 16px 0;
+      text-align: center;
+
+      .save-btn {
+        width: 247px;
+        height: 40px;
+        color: #FFFFFF;
+        font-family: 'ArialMT', 'Arial';
+        font-weight: 400;
+        font-style: normal;
+        font-size: 13px;
+        background-color: #FB9C13;
+      }
+    }
+  }
+
+  // 步骤2 窗口审核
+  .wait-step {
+    min-width: 500px;
+    margin-top: 20px;
+    display: inline-block;
+
+    .wait-head {
+      margin-bottom: 50px;
+
+      .wait-img,
+      .wait-intro {
+        display: inline-block;
+      }
+
+      .wait-intro {
+        text-align: left;
+        margin-left: 20px;
+        vertical-align: top;
+        font-size: 16px;
+        color: #666666;
+        max-width: 500px;
+        word-break: break-word;
+
+        .wait-msg {
+          font-size: 14px;
+          color: #FB9C13;
+          margin-top: 30px;
+          margin-bottom: 10px;
+        }
+      }
+    }
+
+    .wait-detail {
+      .detail-div {
+        text-align: left;
+        margin-left: 10px;
+
+        &>span {
+          display: inline-block;
+        }
+      }
+
+      .detail-dot {
+        width: 10px;
+        height: 10px;
+        background-color: #FB9C13;
+        border-radius: 100%;
+        vertical-align: top;
+        margin-top: 5px;
+      }
+
+      .detail-text {
+        font-size: 14px;
+        margin-left: 10px;
+
+        .content {
+          font-family: 'PingFangSC-Regular', 'PingFang SC';
+          font-weight: 400;
+          font-style: normal;
+          font-size: 12px;
+          color: #999999;
+        }
+      }
+    }
+
+
+    .samll-title {
+      margin-bottom: 10px;
+
+      .title-text {
+        font-size: 14px;
+      }
+    }
+
+    .btn-div {
+      .edit-btn {
+        width: 155px;
+        height: 29px;
+        line-height: 0px;
+        color: #FFFFFF;
+        font-family: 'ArialMT', 'Arial';
+        font-weight: 400;
+        font-style: normal;
+        font-size: 13px;
+        background-color: #FB9C13;
+      }
+    }
+  }
+
+  /*隐藏el-image图片组件中不需要展示的的img标签*/
+  .hideImgDiv {
+
+    .el-image__inner,
+    .el-image__error {
+      display: none;
+    }
+  }
+}
